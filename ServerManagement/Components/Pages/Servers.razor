@@ -15,12 +15,31 @@
 <h3>Servers</h3>
 <br/>
 <br/>
+<<<<<<< HEAD
 
 <CityListComponent 
     @ref="cityListComponent" 
     SelectCityCallback="HandleCitySelection"
     selectedCity="@this.selectedCity"></CityListComponent>
 
+=======
+<div class="container-fluid text-center">
+    <div class="row w-50">
+        @foreach (var city in cities)
+        {
+            <div class="col">
+                <div class="card @(selectedCity.Equals(city, StringComparison.OrdinalIgnoreCase)?"border-primary":"")">
+                    <img src="@($"/images/{city}.png")" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <button type="button" class="btn btn-primary" @onclick="@(() => { SelectCity(city); })">@city</button>
+                    </div>
+                </div>
+                
+            </div>
+        }
+    </div>
+</div>
+>>>>>>> parent of f249fdc (Extract city components)
 <br />
 
 <SearchBarComponent 
@@ -30,17 +49,31 @@
 
 <br/>
 
+<<<<<<< HEAD
 <CascadingValue Name="SelectedCity" Value="@selectedCity">
     <ServerListComponent         
         CityName="@this.selectedCity"
         SearchFilter="@searchFilter"></ServerListComponent>
 </CascadingValue>
+=======
+<ServerListComponent 
+    @rendermode="InteractiveServer" 
+    CityName="@this.selectedCity" ></ServerListComponent>
+>>>>>>> parent of f249fdc (Extract city components)
 
 <p>
     <a href="/servername" class="btn btn-primary">Add Server</a>
 </p>
 
+<<<<<<< HEAD
 @code {
+=======
+@code {    
+
+    private List<String> cities = CitiesRepository.GetCities();
+
+    private string selectedCity = "Toronto";
+>>>>>>> parent of f249fdc (Extract city components)
 
     [Parameter]
     public string? CityName { get; set; }
@@ -51,11 +84,26 @@
     private CityListComponent? cityListComponent;
     private SearchBarComponent? searchBarComponent;
 
+<<<<<<< HEAD
+=======
+            //this.servers = ServersRepository.SearchServers(_serverFilter);
+        }
+    }
+    
+
+    private void SelectCity(string cityName)
+    {
+        this.selectedCity = cityName;
+
+        //this.servers = ServersRepository.GetServersByCity(this.selectedCity);        
+    }
+    
+>>>>>>> parent of f249fdc (Extract city components)
     private void HandleSearch()
     {
         //this.servers = ServersEFCoreRepository.SearchServers(serverFilter);
 
-        //this.selectedCity = string.Empty;
+        this.selectedCity = string.Empty;
     }
 
     private void HandleCitySelection(string cityName)
